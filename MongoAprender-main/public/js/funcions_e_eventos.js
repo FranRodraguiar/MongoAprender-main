@@ -3,9 +3,11 @@ import { eventosEGB } from "./helpers.js";
 function preparandoDatos(datos) {
     datos.documentos.map((documento) => {
     let _div = document.createElement("div");
+    _div.setAttribute("id",`${documento._id}`);
     document.querySelector(".lista").append(_div);
     let _span = document.createElement("span");
-
+    //para comprobar, sacamos o documento por consola:
+    //console.log('documento: ',documento._id,documento);
     let tamanhio = Object.keys(documento).length;
     let elementos = Object.values(documento);
 
@@ -29,6 +31,7 @@ function preparandoDatos(datos) {
     for(let imaxenes of imax) {
 
       let imx = document.createElement("img");
+      
       imx.setAttribute("src", `./assets/${imaxenes}.png`);
       imx.setAttribute("class", `${imaxenes}`);
       _div.append(imx);
@@ -45,9 +48,9 @@ function preparandoDatos(datos) {
         let refTodosGardar = document.querySelectorAll('.guardar');
         let refTodosBorrar = document.querySelectorAll('.borrar');
         
-        eventosEGB(refTodosEditar)
-        eventosEGB(refTodosGardar)
-        eventosEGB(refTodosBorrar)
+        eventosEGB(refTodosEditar);
+        eventosEGB(refTodosGardar);
+        eventosEGB(refTodosBorrar);
 
       })//_div interno
 }

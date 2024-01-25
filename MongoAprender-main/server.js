@@ -2,13 +2,18 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const app = express();
+const fileUpload = require("express-fileupload");
+
 //Utilizamos as funcións utilizadas para mongodb
 
-const { fLerDatos } = require("./middlewares/index.js");
+const { 
+  fLerDatos,
+  fBorrarDatos } = require("./middlewares/index.js");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(fileUpload());
 // Accedo o arquivo estático
 app.use(express.static(path.join(__dirname, "public")));
 // A partir de aqui establecense os endpoint do BACKEND
@@ -17,7 +22,15 @@ app.use(express.static(path.join(__dirname, "public")));
     let obxeto = {enviados:"enviando datos..."}
     res.send(obxeto);
 });*/
+//app.get("/borradodatos/:id",fBorrarDatos)
 app.get("/lecturadatos",fLerDatos)
+app.get("/borradodatos/:id",fBorrarDatos)
+//app.delete("/borradodatos/:id",fBorrarDatos)
+//app.get("/borradodatos",fBorrarDatos)
+//app.delete("/borradodatos",fBorrarDatos)
+
+//app.put("/modificadodatos",fEditarDatos)
+
 //INICIAR SERVIDOR
 app.listen(4000, function() {
   console.log("Server running");
